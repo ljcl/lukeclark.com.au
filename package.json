@@ -1,0 +1,59 @@
+{
+  "name": "lukeclark-fe",
+  "description": "lukeclark.com.au on gatsby.js and netlify cms",
+  "version": "1.0.0",
+  "author": "Luke Clark",
+  "dependencies": {
+    "@babel/preset-flow": "^7.0.0",
+    "flow-bin": "^0.87.0",
+    "gatsby": "^2.0.64",
+    "gatsby-plugin-feed": "^2.0.11",
+    "gatsby-plugin-flow": "^1.0.2",
+    "gatsby-plugin-google-analytics": "^2.0.8",
+    "gatsby-plugin-manifest": "^2.0.11",
+    "gatsby-plugin-netlify": "^2.0.6",
+    "gatsby-plugin-netlify-cms": "^3.0.9",
+    "gatsby-plugin-react-helmet": "^3.0.4",
+    "gatsby-plugin-sharp": "^2.0.15",
+    "gatsby-plugin-typography": "^2.2.2",
+    "gatsby-remark-images": "^3.0.1",
+    "gatsby-remark-prismjs": "^3.1.4",
+    "gatsby-remark-relative-images": "^0.2.1",
+    "gatsby-remark-responsive-iframe": "^2.0.7",
+    "gatsby-remark-smartypants": "^2.0.7",
+    "gatsby-source-filesystem": "^2.0.11",
+    "gatsby-transformer-remark": "^2.1.15",
+    "gatsby-transformer-sharp": "^2.1.9",
+    "lodash": "^4.17.11",
+    "lodash-webpack-plugin": "^0.11.4",
+    "netlify-cms": "^2.3.0",
+    "parcel-bundler": "^1.10.3",
+    "prismjs": "^1.15.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-helmet": "^5.2.0",
+    "react-typography": "^0.16.18",
+    "typography": "^0.16.18",
+    "typography-theme-us-web-design-standards": "^0.16.18",
+    "uuid": "^3.2.1"
+  },
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "scripts": {
+    "start": "npm run develop",
+    "clean": "rimraf .cache public",
+    "build": "npm run clean && gatsby build",
+    "develop": "npm run clean && gatsby develop",
+    "serve": "npm run clean && gatsby serve",
+    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
+    "typecheck": "./node_modules/.bin/flow"
+  },
+  "devDependencies": {
+    "prettier": "^1.15.3",
+    "rimraf": "^2.6.2"
+  }
+}
