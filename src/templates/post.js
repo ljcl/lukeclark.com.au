@@ -88,6 +88,7 @@ const BlogPost = ({ data, location, pageContext }: BlogPostType) => {
             link={previous.fields.slug}
             title={previous.frontmatter.title}
             description={previous.frontmatter.description}
+            type="post"
             rel="prev"
           />
         )}
@@ -96,6 +97,7 @@ const BlogPost = ({ data, location, pageContext }: BlogPostType) => {
             link={next.fields.slug}
             title={next.frontmatter.title}
             description={next.frontmatter.description}
+            type="post"
             rel="next"
           />
         )}

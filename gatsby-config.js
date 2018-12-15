@@ -1,3 +1,7 @@
+require('dotenv').config({
+  path: `.env.${process.env.NODE_ENV}`
+});
+
 module.exports = {
   siteMetadata: {
     title: 'Luke Clark',
@@ -78,6 +82,13 @@ module.exports = {
         theme_color: `#E42341`,
         display: `minimal-ui`,
         icon: `static/favicon.png`
+      }
+    },
+    {
+      resolve: 'gatsby-source-pinboard',
+      options: {
+        authToken: process.env.PINBOARD_AUTH,
+        tags: 'site-feed'
       }
     },
     'gatsby-plugin-react-helmet',

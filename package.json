@@ -5,6 +5,7 @@
   "author": "Luke Clark",
   "dependencies": {
     "@babel/preset-flow": "^7.0.0",
+    "dotenv": "^6.2.0",
     "flow-bin": "^0.87.0",
     "gatsby": "^2.0.64",
     "gatsby-plugin-feed": "^2.0.11",
@@ -22,6 +23,7 @@
     "gatsby-remark-responsive-iframe": "^2.0.7",
     "gatsby-remark-smartypants": "^2.0.7",
     "gatsby-source-filesystem": "^2.0.11",
+    "gatsby-source-pinboard": "^0.1.4",
     "gatsby-transformer-remark": "^2.1.15",
     "gatsby-transformer-sharp": "^2.1.9",
     "lodash": "^4.17.11",

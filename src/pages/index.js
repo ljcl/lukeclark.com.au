@@ -11,6 +11,9 @@ type IndexPageProps = {
   data: $Shape<{
     allMarkdownRemark: $Shape<{
       edges: Array<any>
+    }>,
+    allPinboardBookmark: $Shape<{
+      edges: Array<any>
     }>
   }>,
   location: any
@@ -20,17 +23,40 @@ export default class IndexPage extends React.Component<IndexPageProps> {
   render() {
     const { data, location } = this.props;
     const { edges: posts } = data.allMarkdownRemark;
+    const { edges: pins } = data.allPinboardBookmark;
+
+    const mappedPosts = posts.map(({ node }) => ({
+      key: node.fields.slug,
+      title: node.frontmatter.title,
+      description: node.frontmatter.description,
+      link: node.fields.slug,
+      date: node.frontmatter.date,
+      type: 'post'
+    }));
+
+    const mappedPins = pins.map(({ node }) => ({
+      key: node.href,
+      title: node.description,
+      description: node.extended,
+      link: node.href,
+      date: node.time,
+      type: 'pin'
+    }));
+
+    const mappedData = [...mappedPins, ...mappedPosts].sort(
+      (a, b) => b.date - a.date
+    );
 
     return (
       <Layout location={location}>
         <section style={{ marginBottom: rhythm(2) }}>
-          {posts.map(({ node }) => (
+          {mappedData.map(item => (
             <Card
-              key={node.fields.slug}
-              title={node.frontmatter.title}
-              description={node.frontmatter.description}
-              tags={node.frontmatter.tags}
-              link={node.fields.slug}
+              key={item.key}
+              title={item.title}
+              description={item.description}
+              link={item.link}
+              type={item.type}
             />
           ))}
         </section>
@@ -57,8 +83,18 @@ export const pageQuery = graphql`
             description
             tags
             templateKey
-            date(formatString: "MMMM DD, YYYY")
+            date(formatString: "X")
           }
+        }
+      }
+    }
+    allPinboardBookmark(limit: 50) {
+      edges {
+        node {
+          href
+          description
+          extended
+          time(formatString: "X")
         }
       }
     }
