@@ -37,7 +37,6 @@ function Meta({ meta = [], image, title, description, slug = '' }: MetaProps) {
         const metaDescription = description || siteMetadata.description;
         const metaImage = image ? `${siteMetadata.siteUrl}/${image}` : null;
         const url = `${siteMetadata.siteUrl}${slug}`;
-        console.log(metaDescription);
         return (
           <Helmet
             htmlAttributes={{ lang: 'en' }}
