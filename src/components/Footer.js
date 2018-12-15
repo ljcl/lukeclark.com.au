@@ -2,11 +2,14 @@
 
 import React from 'react';
 import { rhythm } from '../utils/typography';
+import Observer from './Observer/Observer';
+import LastFmNowPlaying from './LastFmNowPlaying';
 
 const Footer = () => (
   <footer
     style={{
-      marginTop: rhythm(3)
+      marginTop: rhythm(3),
+      marginBottom: rhythm(1)
     }}
   >
     <a
@@ -32,6 +35,15 @@ const Footer = () => (
     >
       tweet
     </a>
+    <div style={{ float: 'right' }}>
+      <Observer
+        rootMargin="0px 0px 256px 0px"
+        threshold={1}
+        triggerOnce
+        observerId="lastFmNowPlaying"
+        render={inView => inView && <LastFmNowPlaying />}
+      />
+    </div>
   </footer>
 );
 
