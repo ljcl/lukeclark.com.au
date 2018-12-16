@@ -1,11 +1,8 @@
 ---
-templateKey: 'post'
 title: 'Search: 301 Redirect Changes'
 date: 2016-08-03T15:04:10.000Z
 description: >-
   Google is changing how it interprets your 301 (and other 30X) redirects. Heres a comparison of the old and the new, and what you should already be doing.
-tags:
-  - search-and-marketing
 ---
 
 Google is changing how it interprets your 301 (and other 30X) redirects. Heres a comparison of the old and the new, and what you should already be doing.

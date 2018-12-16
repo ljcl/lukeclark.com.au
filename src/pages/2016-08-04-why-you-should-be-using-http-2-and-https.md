@@ -1,10 +1,7 @@
 ---
-templateKey: post
 title: Why you should be using HTTP/2 and HTTPS
 date: 2016-08-04T15:04:10.000Z
 description: You should be using h2 (HTTP/2) and HTTPS and compelling reasons to make the switch to HTTPS if for you still haven’t.
-tags:
-  - performance
 ---
 
 Why you should be using HTTP/2 and HTTPS

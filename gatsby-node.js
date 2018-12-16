@@ -11,48 +11,47 @@ exports.createPages = ({ actions, graphql }) => {
     redirectInBrowser: true,
     toPath: `/`
   });
-
-  return graphql(`
-    {
-      allMarkdownRemark(limit: 1000) {
-        edges {
-          node {
-            id
-            fields {
-              slug
-            }
-            frontmatter {
-              templateKey
+  return new Promise((resolve, reject) => {
+    const postTemplate = path.resolve(`src/templates/post.js`);
+    resolve(
+      graphql(`
+        {
+          allMarkdownRemark(limit: 1000) {
+            edges {
+              node {
+                frontmatter {
+                  title
+                  description
+                }
+                fields {
+                  slug
+                }
+              }
             }
           }
         }
-      }
-    }
-  `).then(result => {
-    if (result.errors) {
-      result.errors.forEach(e => console.error(e.toString()));
-      return Promise.reject(result.errors);
-    }
-
-    const posts = result.data.allMarkdownRemark.edges;
-
-    posts.forEach((edge, index) => {
-      const id = edge.node.id;
-      const previous =
-        index === posts.length - 1 ? null : posts[index + 1].node;
-      const next = index === 0 ? null : posts[index - 1].node;
-      createPage({
-        path: edge.node.fields.slug,
-        component: path.resolve(
-          `src/templates/${String(edge.node.frontmatter.templateKey)}.js`
-        ),
-        context: {
-          id,
-          previous,
-          next
+      `).then(result => {
+        if (result.errors) {
+          console.log(result.errors);
+          reject(result.errors);
         }
-      });
-    });
+        const posts = result.data.allMarkdownRemark.edges;
+        posts.map((post, index) => {
+          const previous =
+            index === posts.length - 1 ? null : posts[index + 1].node;
+          const next = index === 0 ? null : posts[index - 1].node;
+          createPage({
+            path: post.node.fields.slug,
+            component: postTemplate,
+            context: {
+              previous,
+              next,
+              slug: post.node.fields.slug
+            }
+          });
+        });
+      })
+    );
   });
 };
 
