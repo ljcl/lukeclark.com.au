@@ -1,10 +1,7 @@
 ---
-templateKey: post
 title: Save your commit history to a running Harvest timer
 date: 2016-08-15T15:04:10.000Z
 description: Knock out two birds with one stone by saving your latest commit message to Harvest
-tags:
-  - node.js
 ---
 
 A git hook is a script that will run at certain points in git's execution. They are per repository, and remain local so they do not push to remotes.

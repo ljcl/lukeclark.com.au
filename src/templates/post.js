@@ -13,7 +13,6 @@ type BlogPostType = {
   data: {
     markdownRemark: {
       html: string,
-      id: string,
       frontmatter: {
         date: string,
         title: string,
@@ -74,34 +73,6 @@ const BlogPost = ({ data, location, pageContext }: BlogPostType) => {
         </div>
         <HTMLContent content={postHtml} />
       </article>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
-          listStyle: 'none',
-          padding: 0
-        }}
-      >
-        {previous && (
-          <Card
-            link={previous.fields.slug}
-            title={previous.frontmatter.title}
-            description={previous.frontmatter.description}
-            type="post"
-            rel="prev"
-          />
-        )}
-        {next && (
-          <Card
-            link={next.fields.slug}
-            title={next.frontmatter.title}
-            description={next.frontmatter.description}
-            type="post"
-            rel="next"
-          />
-        )}
-      </div>
       <Bio />
     </Layout>
   );
@@ -110,15 +81,15 @@ const BlogPost = ({ data, location, pageContext }: BlogPostType) => {
 export default BlogPost;
 
 export const pageQuery = graphql`
-  query BlogPostByID($id: String!) {
+  query BlogPostBySlug($slug: String!) {
     site {
       siteMetadata {
         title
         description
+        author
       }
     }
-    markdownRemark(id: { eq: $id }) {
-      id
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       frontmatter {
         date(formatString: "MMMM DD, YYYY")

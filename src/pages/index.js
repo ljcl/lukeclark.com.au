@@ -68,21 +68,22 @@ export default class IndexPage extends React.Component<IndexPageProps> {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date] }
-      filter: { frontmatter: { templateKey: { eq: "post" } } }
-    ) {
+    site {
+      siteMetadata {
+        title
+        author
+        description
+      }
+    }
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
-          id
           fields {
             slug
           }
           frontmatter {
             title
             description
-            tags
-            templateKey
             date(formatString: "X")
           }
         }

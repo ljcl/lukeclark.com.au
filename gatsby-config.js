@@ -13,7 +13,6 @@ module.exports = {
       instagram: '@ljcl'
     }
   },
-  pathPrefix: '/',
   plugins: [
     `gatsby-plugin-flow`,
     {

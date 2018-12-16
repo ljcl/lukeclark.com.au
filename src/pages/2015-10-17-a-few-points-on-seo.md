@@ -1,11 +1,8 @@
 ---
-templateKey: 'post'
 title: A Few Points on 'SEO'
 date: 2015-10-17T15:04:10.000Z
 description: >-
   Some observational points on why you should work on investing in quality content, a good platform, and classic marketing
-tags:
-  - search-and-marketing
 ---
 
 1.  Instead of buying the snake oil, start with a content strategy.
