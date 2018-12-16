@@ -1,1 +1,6 @@
-import './src/utils/theme.css';
+exports.onClientEntry = () => {
+  if (typeof window.IntersectionObserver === `undefined`) {
+    import(`intersection-observer`);
+    console.log(`👍 IntersectionObserver is polyfilled`);
+  }
+};
