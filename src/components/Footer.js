@@ -37,7 +37,7 @@ const Footer = () => (
     </a>
     <div style={{ float: 'right' }}>
       <Observer
-        rootMargin="0px 0px 256px 0px"
+        rootMargin="0px 0px 512px 0px"
         threshold={1}
         triggerOnce
         observerId="lastFmNowPlaying"
