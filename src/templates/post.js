@@ -5,7 +5,6 @@ import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Meta from '../components/Meta';
 import Bio from '../components/Bio';
-import Card from '../components/Card';
 import { HTMLContent } from '../components/Content';
 import { rhythm } from '../utils/typography';
 
@@ -29,12 +28,12 @@ type BlogPostType = {
       }
     }
   },
-  location: any,
-  pageContext: any
+  location: {
+    pathname: string
+  }
 };
 
 const BlogPost = ({ data, location, pageContext }: BlogPostType) => {
-  const { next, previous } = pageContext;
   const {
     markdownRemark: {
       html: postHtml,
