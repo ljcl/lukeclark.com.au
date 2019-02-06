@@ -1,3 +1,5 @@
+// @flow
+
 import Typography from 'typography';
 import Uswds from 'typography-theme-us-web-design-standards';
 

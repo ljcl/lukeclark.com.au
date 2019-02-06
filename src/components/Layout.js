@@ -9,7 +9,9 @@ import logo from './logo.svg';
 
 type LayoutProps = {
   children: React$Node,
-  location: Object
+  location: {
+    pathname: string
+  }
 };
 
 const Layout = ({ children, location }: LayoutProps) => {
