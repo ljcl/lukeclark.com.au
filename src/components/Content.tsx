@@ -1,10 +1,8 @@
-// @flow
-
 import React from 'react';
 
 export type ContentProps = {
-  content: string,
-  className?: string
+  content: string;
+  className?: string;
 };
 
 export const HTMLContent = ({ content, className }: ContentProps) => (

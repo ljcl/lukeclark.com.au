@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { rhythm } from '../utils/typography';
 import profileImg from './profile-img.jpg';

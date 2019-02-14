@@ -1,7 +1,5 @@
-// @flow
-
-const observerStorage: Object = new Map();
-const instanceMap: Object = new Map();
+const observerStorage = new Map();
+const instanceMap = new Map();
 
 export const destroy = () => {
   observerStorage.forEach(observer => {
@@ -38,10 +36,10 @@ const handleIntersection = (
 
 const initObserver = (
   observerId: string,
-  callback: Function,
-  options: Object
+  callback: IntersectionObserverCallback,
+  options: IntersectionObserverInit | undefined
 ) => {
-  let observerInstance: ?IntersectionObserver = observerId
+  let observerInstance: IntersectionObserver = observerId
     ? observerStorage.get(observerId)
     : null;
   if (!observerInstance) {
@@ -54,7 +52,7 @@ const initObserver = (
 
 export const observe = (
   element: HTMLElement,
-  options: Object,
+  options: IntersectionObserverInit | undefined,
   observerId: string,
   callback: Function
 ) => {

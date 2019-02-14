@@ -1,25 +1,22 @@
-// @flow
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { observe, unobserve, destroy } from './utils';
 
-type Props = {|
-  triggerOnce?: boolean,
-  threshold?: number | Array<number>,
-  root?: HTMLElement,
-  rootMargin?: string,
-  className?: string,
-  observerId?: string,
-  render: boolean => React$Node
-|};
+type Props = {
+  triggerOnce?: boolean;
+  threshold?: number | number[];
+  root?: HTMLElement;
+  rootMargin?: string;
+  className?: string;
+  observerId?: string;
+  render: (input: boolean) => ReactNode;
+};
 
-type State = {|
-  inView: boolean
-|};
+type State = {
+  inView: boolean;
+};
 
 class Observer extends React.Component<Props, State> {
-  observerNode: ?HTMLElement;
-
-  isInViewPort: boolean => void;
+  observerNode!: HTMLElement;
 
   static defaultProps = {
     threshold: 0.1,
@@ -79,7 +76,7 @@ class Observer extends React.Component<Props, State> {
 
     return (
       <div
-        ref={(observerNode: ?HTMLElement) => {
+        ref={(observerNode: HTMLDivElement) => {
           this.observerNode = observerNode;
         }}
         className={className}

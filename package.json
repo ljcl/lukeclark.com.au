@@ -4,18 +4,17 @@
   "version": "1.0.0",
   "author": "Luke Clark",
   "dependencies": {
-    "@babel/preset-flow": "^7.0.0",
+    "@types/react-helmet": "^5.0.8",
     "dotenv": "^6.2.0",
-    "flow-bin": "^0.92.1",
-    "gatsby": "^2.0.115",
+    "gatsby": "^2.1.0",
     "gatsby-plugin-feed": "^2.0.13",
-    "gatsby-plugin-flow": "^1.0.2",
     "gatsby-plugin-google-analytics": "^2.0.13",
     "gatsby-plugin-manifest": "^2.0.17",
-    "gatsby-plugin-netlify": "^2.0.8",
+    "gatsby-plugin-netlify": "^2.0.10",
     "gatsby-plugin-netlify-cms": "^3.0.12",
     "gatsby-plugin-react-helmet": "^3.0.6",
     "gatsby-plugin-sharp": "^2.0.20",
+    "gatsby-plugin-typescript": "^2.0.8",
     "gatsby-plugin-typography": "^2.2.7",
     "gatsby-remark-images": "^3.0.3",
     "gatsby-remark-prismjs": "^3.2.4",
@@ -24,22 +23,17 @@
     "gatsby-remark-smartypants": "^2.0.8",
     "gatsby-source-filesystem": "^2.0.20",
     "gatsby-source-pinboard": "^0.1.4",
-    "gatsby-transformer-remark": "^2.2.4",
+    "gatsby-transformer-remark": "^2.2.5",
     "gatsby-transformer-sharp": "^2.1.13",
     "intersection-observer": "^0.5.1",
-    "lodash": "^4.17.11",
-    "lodash-webpack-plugin": "^0.11.4",
-    "netlify-cms": "^2.3.3",
-    "parcel-bundler": "^1.11.0",
+    "netlify-cms": "^2.4.2",
     "prismjs": "^1.15.0",
-    "prop-types": "^15.6.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-helmet": "^5.2.0",
     "react-typography": "^0.16.18",
     "typography": "^0.16.18",
-    "typography-theme-us-web-design-standards": "^0.16.18",
-    "uuid": "^3.2.1"
+    "typography-theme-us-web-design-standards": "^0.16.18"
   },
   "keywords": [
     "gatsby"
@@ -52,11 +46,17 @@
     "build": "npm run clean && gatsby build",
     "develop": "npm run clean && gatsby develop",
     "serve": "npm run clean && gatsby serve",
-    "format": "prettier --trailing-comma es5 --no-semi --single-quote --write \"{gatsby-*.js,src/**/*.js}\"",
-    "typecheck": "./node_modules/.bin/flow"
+    "typecheck": "tsc --noEmit",
+    "lint": "tslint --project .",
+    "codegen": "apollo codegen:generate --outputFlat --tagName=graphql --target=typescript ./src/types/"
   },
   "devDependencies": {
+    "apollo": "^2.5.0",
     "prettier": "^1.16.4",
-    "rimraf": "^2.6.3"
+    "rimraf": "^2.6.3",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.3.3"
   }
 }

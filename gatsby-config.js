@@ -14,18 +14,19 @@ module.exports = {
     }
   },
   plugins: [
-    `gatsby-plugin-flow`,
+    `gatsby-plugin-typescript`,
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/pages`,
-        name: 'pages'
+        path: `${__dirname}/src/posts/`,
+        name: 'posts',
+        ignore: [`**/__generated__/*`]
       }
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/assets`,
+        path: `${__dirname}/src/assets/`,
         name: 'images'
       }
     },
