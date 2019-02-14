@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
@@ -21,11 +19,11 @@ const query = graphql`
 `;
 
 type MetaProps = {
-  description?: string,
-  image?: string,
-  meta?: [],
-  slug?: string,
-  title?: string
+  description?: string;
+  image?: string;
+  meta?: [];
+  slug?: string;
+  title?: string;
 };
 
 function Meta({ meta = [], image, title, description, slug = '' }: MetaProps) {

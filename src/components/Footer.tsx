@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { rhythm } from '../utils/typography';
 import Observer from './Observer/Observer';

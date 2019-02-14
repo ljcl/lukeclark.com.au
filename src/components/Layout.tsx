@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import Meta from './Meta';
 import Footer from './Footer';
@@ -8,10 +6,10 @@ import { rhythm, scale } from '../utils/typography';
 import logo from './logo.svg';
 
 type LayoutProps = {
-  children: React$Node,
+  children: React.ReactNode;
   location: {
-    pathname: string
-  }
+    pathname: string;
+  };
 };
 
 const Layout = ({ children, location }: LayoutProps) => {
@@ -36,7 +34,7 @@ const Layout = ({ children, location }: LayoutProps) => {
               src={logo}
               alt="Luke Clark"
               style={{
-                width: isHome && '88px',
+                width: isHome ? '88px' : undefined,
                 marginBottom: 0,
                 display: 'block'
               }}

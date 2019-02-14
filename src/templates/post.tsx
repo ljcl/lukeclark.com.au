@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
@@ -11,29 +9,29 @@ import { rhythm } from '../utils/typography';
 type BlogPostType = {
   data: {
     markdownRemark: {
-      html: string,
+      html: string;
       frontmatter: {
-        date: string,
-        title: string,
-        description: string
-      },
+        date: string;
+        title: string;
+        description: string;
+      };
       fields: {
-        slug: string
-      }
-    },
+        slug: string;
+      };
+    };
     site: {
       siteMetadata: {
-        title: string,
-        description: string
-      }
-    }
-  },
+        title: string;
+        description: string;
+      };
+    };
+  };
   location: {
-    pathname: string
-  }
+    pathname: string;
+  };
 };
 
-const BlogPost = ({ data, location, pageContext }: BlogPostType) => {
+const BlogPost = ({ data, location }: BlogPostType) => {
   const {
     markdownRemark: {
       html: postHtml,
@@ -50,11 +48,11 @@ const BlogPost = ({ data, location, pageContext }: BlogPostType) => {
   } = data;
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location}>
       <Meta title={postTitle} description={postDescription} slug={slug} />
       <article
         style={{ marginBottom: rhythm(2) }}
-        itemScope="itemscope"
+        itemScope
         itemType="http://schema.org/BlogPosting"
       >
         <h1>{postTitle}</h1>

@@ -1,4 +1,3 @@
-const { each } = require('lodash');
 const path = require('path');
 const { createFilePath } = require('gatsby-source-filesystem');
 
@@ -12,7 +11,7 @@ exports.createPages = ({ actions, graphql }) => {
     toPath: `/`
   });
   return new Promise((resolve, reject) => {
-    const postTemplate = path.resolve(`src/templates/post.js`);
+    const postTemplate = path.resolve(`src/templates/post.tsx`);
     resolve(
       graphql(`
         {
