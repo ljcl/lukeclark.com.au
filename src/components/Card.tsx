@@ -19,7 +19,7 @@ const Card = ({ title, description, link, rel, type }: CardProps) => {
         </Link>
       </h2>
       <p itemProp="description" style={{ fontSize }}>
-        {description}
+        {type === 'post' && description}
       </p>
     </article>
   ) : null;
