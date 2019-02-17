@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import Link from './Link';
 
 type CardProps = {
@@ -10,17 +11,26 @@ type CardProps = {
 };
 
 const Card = ({ title, description, link, rel, type }: CardProps) => {
-  const fontSize = type !== 'post' ? '1rem' : undefined;
+  const articleStyles = css`
+    margin-bottom: 1.529rem;
+    h2,
+    p {
+      margin-bottom: 0;
+      font-size: ${type !== 'post' && '1rem'};
+    }
+  `;
   return title && link ? (
-    <article itemScope itemType="http://schema.org/BlogPosting">
-      <h2 style={{ marginBottom: 0, fontSize }}>
+    <article
+      itemScope
+      itemType="http://schema.org/BlogPosting"
+      css={articleStyles}
+    >
+      <h2>
         <Link to={link} rel={rel}>
           {title}
         </Link>
       </h2>
-      <p itemProp="description" style={{ fontSize }}>
-        {type === 'post' && description}
-      </p>
+      <p itemProp="description">{type === 'post' && description}</p>
     </article>
   ) : null;
 };

@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Meta from '../components/Meta';
@@ -26,9 +27,7 @@ type BlogPostType = {
       };
     };
   };
-  location: {
-    pathname: string;
-  };
+  location: Location;
 };
 
 const BlogPost = ({ data, location }: BlogPostType) => {
@@ -41,9 +40,6 @@ const BlogPost = ({ data, location }: BlogPostType) => {
         date: postDate
       },
       fields: { slug }
-    },
-    site: {
-      siteMetadata: { title: siteTitle }
     }
   } = data;
 
@@ -51,20 +47,22 @@ const BlogPost = ({ data, location }: BlogPostType) => {
     <Layout location={location}>
       <Meta title={postTitle} description={postDescription} slug={slug} />
       <article
-        style={{ marginBottom: rhythm(2) }}
+        css={css`
+          margin-bottom: ${rhythm(2)};
+        `}
         itemScope
         itemType="http://schema.org/BlogPosting"
       >
         <h1>{postTitle}</h1>
         <div
-          style={{
-            color: '#707070',
-            fontSize: '0.8rem',
-            textTransform: 'uppercase',
-            fontWeight: 500,
-            marginTop: rhythm(-1),
-            marginBottom: rhythm(2)
-          }}
+          css={css`
+            color: #707070;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-top: ${rhythm(-1)};
+            margin-bottom: ${rhythm(2)};
+          `}
         >
           {postDate}
         </div>
@@ -79,13 +77,6 @@ export default BlogPost;
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
-    site {
-      siteMetadata {
-        title
-        description
-        author
-      }
-    }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       frontmatter {

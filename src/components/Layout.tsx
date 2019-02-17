@@ -1,4 +1,6 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { ReactNode } from 'react';
 import Meta from './Meta';
 import Footer from './Footer';
 import { Link } from 'gatsby';
@@ -6,39 +8,38 @@ import { rhythm, scale } from '../utils/typography';
 import logo from './logo.svg';
 
 type LayoutProps = {
-  children: React.ReactNode;
-  location: {
-    pathname: string;
-  };
+  children: ReactNode;
+  location: Location;
 };
 
 const Layout = ({ children, location }: LayoutProps) => {
   const isHome = location.pathname === '/';
+
+  const layoutStyle = css`
+    margin-left: auto;
+    margin-right: auto;
+    max-width: ${rhythm(28)};
+    padding: ${rhythm(1.5)} ${rhythm(3 / 4)};
+
+    figure {
+      margin-bottom: ${rhythm(isHome ? 2 : 1)};
+      ${scale(1.0)}
+    }
+
+    .logo {
+      width: ${isHome && '88px'};
+      margin-bottom: 0;
+      display: block;
+    }
+  `;
+
   return (
-    <div
-      style={{
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        maxWidth: rhythm(28),
-        padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`
-      }}
-    >
+    <div css={layoutStyle}>
       <Meta />
       <nav className="navbar is-transparent">
         <Link to="/" className="navbar-item">
-          <figure
-            className="image"
-            style={{ marginBottom: rhythm(isHome ? 2 : 1), ...scale(1.0) }}
-          >
-            <img
-              src={logo}
-              alt="Luke Clark"
-              style={{
-                width: isHome ? '88px' : undefined,
-                marginBottom: 0,
-                display: 'block'
-              }}
-            />
+          <figure className="image">
+            <img src={logo} alt="Luke Clark" className="logo" />
           </figure>
         </Link>
       </nav>
