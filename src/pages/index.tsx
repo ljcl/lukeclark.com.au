@@ -1,4 +1,6 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { Component } from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Bio from '../components/Bio';
@@ -12,12 +14,10 @@ import {
 
 type IndexPageProps = {
   data: IndexQuery;
-  location: {
-    pathname: string;
-  };
+  location: Location;
 };
 
-export default class IndexPage extends React.Component<IndexPageProps> {
+export default class IndexPage extends Component<IndexPageProps> {
   render() {
     const { data, location } = this.props;
     let pins;
@@ -60,15 +60,16 @@ export default class IndexPage extends React.Component<IndexPageProps> {
       : [];
 
     const mappedData = [...pins, ...posts]
-      .filter(
-        item =>
-          item.title && item.description && item.link && item.type && item.date
-      )
+      .filter(item => item.title && item.link && item.type && item.date)
       .sort((a, b) => b.date - a.date);
 
     return (
       <Layout location={location}>
-        <section style={{ marginBottom: rhythm(2) }}>
+        <section
+          css={css`
+            margin-bottom: ${rhythm(2)};
+          `}
+        >
           {mappedData &&
             mappedData.map(item => (
               <Card
@@ -88,13 +89,6 @@ export default class IndexPage extends React.Component<IndexPageProps> {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    site {
-      siteMetadata {
-        title
-        author
-        description
-      }
-    }
     allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {

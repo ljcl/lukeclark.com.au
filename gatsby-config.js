@@ -16,6 +16,9 @@ module.exports = {
   plugins: [
     `gatsby-plugin-typescript`,
     {
+      resolve: `gatsby-plugin-emotion`,
+    },
+    {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/src/posts/`,

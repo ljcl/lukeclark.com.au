@@ -1,14 +1,15 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
 import { rhythm } from '../utils/typography';
 import Observer from './Observer/Observer';
 import LastFmNowPlaying from './LastFmNowPlaying';
 
 const Footer = () => (
   <footer
-    style={{
-      marginTop: rhythm(3),
-      marginBottom: rhythm(1)
-    }}
+    css={css`
+      margin-top: ${rhythm(3)};
+      margin-bottom: ${rhythm(1)};
+    `}
   >
     <a
       href="https://instagram.com/ljcl"
@@ -33,7 +34,11 @@ const Footer = () => (
     >
       tweet
     </a>
-    <div style={{ float: 'right' }}>
+    <div
+      css={css`
+        float: right;
+      `}
+    >
       <Observer
         rootMargin="0px 0px 512px 0px"
         threshold={1}

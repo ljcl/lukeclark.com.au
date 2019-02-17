@@ -1,7 +1,11 @@
 import React from 'react';
 import Layout from '../components/Layout';
 
-const NotFoundPage = ({ location }: any) => (
+type NotFoundPageProps = {
+  location: Location;
+};
+
+const NotFoundPage = ({ location }: NotFoundPageProps) => (
   <Layout location={location}>
     <div>
       <h1>NOT FOUND</h1>
