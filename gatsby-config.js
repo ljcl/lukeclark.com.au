@@ -16,7 +16,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-typescript`,
     {
-      resolve: `gatsby-plugin-emotion`,
+      resolve: `gatsby-plugin-emotion`
     },
     {
       resolve: 'gatsby-source-filesystem',
@@ -32,6 +32,9 @@ module.exports = {
         path: `${__dirname}/src/assets/`,
         name: 'images'
       }
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg'
     },
     {
       resolve: 'gatsby-transformer-remark',
