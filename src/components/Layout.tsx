@@ -5,7 +5,7 @@ import Meta from './Meta';
 import Footer from './Footer';
 import { Link } from 'gatsby';
 import { rhythm, scale } from '../utils/typography';
-import logo from './logo.svg';
+import Logo from './logo.svg';
 
 type LayoutProps = {
   children: ReactNode;
@@ -28,6 +28,7 @@ const Layout = ({ children, location }: LayoutProps) => {
 
     .logo {
       width: ${isHome && '88px'};
+      height: ${isHome && '88px'};
       margin-bottom: 0;
       display: block;
     }
@@ -37,9 +38,13 @@ const Layout = ({ children, location }: LayoutProps) => {
     <div css={layoutStyle}>
       <Meta />
       <nav className="navbar is-transparent">
-        <Link to="/" className="navbar-item">
-          <figure className="image">
-            <img src={logo} alt="Luke Clark" className="logo" />
+        <Link to="/" className="navbar-item" title="Luke Clark">
+          <figure
+            className="image"
+            itemScope
+            itemType="http://schema.org/Organization"
+          >
+            <Logo className="logo" />
           </figure>
         </Link>
       </nav>
