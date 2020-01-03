@@ -35,6 +35,7 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-helmet": "^5.2.0",
+    "react-intersection-observer": "^8.25.2",
     "react-typography": "^0.16.18",
     "typography": "^0.16.18",
     "typography-theme-us-web-design-standards": "^0.16.18"
