@@ -8,7 +8,13 @@ type LinkProps = {
   rel?: string;
 };
 
-const Link = ({ children, to, activeClassName, rel, ...other }: LinkProps) => {
+const Link = ({
+  children,
+  to,
+  activeClassName,
+  rel,
+  ...other
+}: LinkProps): JSX.Element => {
   const internal = to.startsWith('/');
 
   if (internal) {

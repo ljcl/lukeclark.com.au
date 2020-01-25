@@ -8,7 +8,7 @@ exports.createPages = ({ actions, graphql }) => {
     fromPath: `/posts`,
     isPermanent: true,
     redirectInBrowser: true,
-    toPath: `/`
+    toPath: `/`,
   });
   return new Promise((resolve, reject) => {
     const postTemplate = path.resolve(`src/templates/post.tsx`);
@@ -45,8 +45,8 @@ exports.createPages = ({ actions, graphql }) => {
             context: {
               previous,
               next,
-              slug: post.node.fields.slug
-            }
+              slug: post.node.fields.slug,
+            },
           });
         });
       })
@@ -62,7 +62,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     createNodeField({
       name: `slug`,
       node,
-      value
+      value,
     });
   }
 };

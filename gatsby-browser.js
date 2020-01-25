@@ -4,3 +4,5 @@ export const onClientEntry = async () => {
     console.log(`👍 IntersectionObserver is polyfilled`);
   }
 };
+
+require('./src/utils/theme.css');

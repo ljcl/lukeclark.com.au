@@ -2,6 +2,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 
+import { GetSiteMetadataQuery } from '../graphqlTypes';
 const query = graphql`
   query GetSiteMetadata {
     site {
@@ -21,81 +22,47 @@ const query = graphql`
 type MetaProps = {
   description?: string;
   image?: string;
-  meta?: [];
   slug?: string;
   title?: string;
 };
 
-function Meta({ meta = [], image, title, description, slug = '' }: MetaProps) {
+function Meta({
+  image,
+  title,
+  description,
+  slug = '',
+}: MetaProps): JSX.Element {
   return (
     <StaticQuery
       query={query}
-      render={data => {
-        const { siteMetadata } = data.site;
-        const metaDescription = description || siteMetadata.description;
-        const metaImage = image ? `${siteMetadata.siteUrl}/${image}` : null;
-        const url = `${siteMetadata.siteUrl}${slug}`;
+      render={(data: GetSiteMetadataQuery): JSX.Element => {
+        const siteMetadata = data.site?.siteMetadata;
+        const metaDescription =
+          description || siteMetadata?.description || undefined;
+        const metaImage = image
+          ? `${siteMetadata?.siteUrl}/${image}`
+          : undefined;
+        const url = `${siteMetadata?.siteUrl}${slug}`;
+        const defaultTitle = siteMetadata?.title || undefined;
+        const twitterUser = siteMetadata?.social?.twitter || undefined;
         return (
           <Helmet
-            htmlAttributes={{ lang: 'en' }}
-            {...(title
-              ? {
-                  titleTemplate: `%s - ${siteMetadata.title}`,
-                  title
-                }
-              : {
-                  title: siteMetadata.title
-                })}
-            meta={[
-              {
-                name: 'description',
-                content: metaDescription
-              },
-              {
-                property: 'og:url',
-                content: url
-              },
-              {
-                property: 'og:title',
-                content: title || siteMetadata.title
-              },
-              {
-                name: 'og:description',
-                content: metaDescription
-              },
-              {
-                name: 'twitter:card',
-                content: 'summary'
-              },
-              {
-                name: 'twitter:creator',
-                content: siteMetadata.social.twitter
-              },
-              {
-                name: 'twitter:title',
-                content: title || siteMetadata.title
-              },
-              {
-                name: 'twitter:description',
-                content: metaDescription
-              }
-            ]
-              .concat(
-                metaImage
-                  ? [
-                      {
-                        property: 'og:image',
-                        content: metaImage
-                      },
-                      {
-                        name: 'twitter:image',
-                        content: metaImage
-                      }
-                    ]
-                  : []
-              )
-              .concat(meta)}
-          />
+            defaultTitle={defaultTitle}
+            titleTemplate={`%s - ${defaultTitle}`}
+          >
+            <html lang="en" />
+            <title>{title}</title>
+            <meta name="description" content={metaDescription} />
+            <meta property="og:url" content={url} />
+            <meta property="og:title" content={title || defaultTitle} />
+            <meta property="og:description" content={metaDescription} />
+            <meta property="twitter:card" content="summary" />
+            <meta property="twitter:creator" content={twitterUser} />
+            <meta property="twitter:title" content={title || defaultTitle} />
+            <meta property="twitter:description" content={metaDescription} />
+            <meta property="og:image" content={metaImage} />
+            <meta property="twitter:image" content={metaImage} />
+          </Helmet>
         );
       }}
     />
