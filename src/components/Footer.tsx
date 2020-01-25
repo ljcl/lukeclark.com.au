@@ -1,22 +1,21 @@
 /** @jsx jsx */
-import * as React from 'react'
 import { css, jsx } from '@emotion/core';
-import { useInView } from 'react-intersection-observer'
+import { useInView } from 'react-intersection-observer';
 import { rhythm } from '../utils/typography';
 import LastFmNowPlaying from './LastFmNowPlaying';
 
 const Footer = () => {
   const [ref, inView] = useInView({
-    rootMargin: "0px 0px 512px 0px",
+    rootMargin: '0px 0px 512px 0px',
     threshold: 1,
-    triggerOnce: true
-  })
+    triggerOnce: true,
+  });
   return (
     <footer
       css={css`
-      margin-top: ${rhythm(3)};
-      margin-bottom: ${rhythm(1)};
-    `}
+        margin-top: ${rhythm(3)};
+        margin-bottom: ${rhythm(1)};
+      `}
     >
       <a
         href="https://instagram.com/ljcl"
@@ -24,15 +23,15 @@ const Footer = () => {
         rel="noopener noreferrer"
       >
         gram
-    </a>
+      </a>
       {', '}
       <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
         rss
-    </a>
+      </a>
       {', '}
       <a href="https://noot.space" target="_blank" rel="noopener noreferrer">
         noot
-    </a>
+      </a>
       {', '}
       <a
         href="https://mobile.twitter.com/lukejclark"
@@ -40,17 +39,17 @@ const Footer = () => {
         rel="noopener noreferrer"
       >
         tweet
-    </a>
+      </a>
       <div
         css={css`
-        float: right;
-      `}
+          float: right;
+        `}
         ref={ref}
       >
         {inView && <LastFmNowPlaying />}
       </div>
     </footer>
-  )
+  );
 };
 
 export default Footer;

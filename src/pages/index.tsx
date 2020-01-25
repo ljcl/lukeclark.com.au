@@ -1,90 +1,84 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { Component } from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Bio from '../components/Bio';
 import Card from '../components/Card';
 import { rhythm } from '../utils/typography';
-import {
-  IndexQuery,
-  IndexQuery_allPinboardBookmark_edges_node as pinNode,
-  IndexQuery_allMarkdownRemark_edges_node as postNode
-} from '../types/IndexQuery';
+import { IndexQueryQuery as Data } from '../graphqlTypes';
 
 type IndexPageProps = {
-  data: IndexQuery;
+  data: Data;
   location: Location;
 };
 
-export default class IndexPage extends Component<IndexPageProps> {
-  render() {
-    const { data, location } = this.props;
-    let pins;
-    let posts;
-    pins = data.allPinboardBookmark ? data.allPinboardBookmark.edges : [];
-    posts = !data.allMarkdownRemark ? [] : data.allMarkdownRemark.edges;
+type FormattedContent = {
+  title: string;
+  description?: string;
+  link: string;
+  date: number;
+  type: string;
+};
 
-    posts = posts
-      ? posts
-          .reduce((accumulator: postNode[], item) => {
-            item &&
-              item.node &&
-              item.node.fields &&
-              item.node.frontmatter &&
-              accumulator.push(item.node);
-            return accumulator;
-          }, [])
-          .map(({ fields, frontmatter }) => ({
-            title: frontmatter && frontmatter.title,
-            description: frontmatter && frontmatter.description,
-            link: fields && fields.slug,
-            date: frontmatter && frontmatter.date,
-            type: 'post'
-          }))
-      : [];
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function formatPosts(data: Data) {
+  const posts = data.allMarkdownRemark.edges
+    .map(({ node: { fields, frontmatter } }) => ({
+      title: frontmatter && frontmatter.title,
+      description: frontmatter && frontmatter.description,
+      link: fields && fields.slug,
+      date: frontmatter && frontmatter.date,
+      type: 'post',
+    }))
+    .filter(({ title, link, date, type }) => title && link && date && type);
+  return posts;
+}
 
-    pins = pins
-      ? pins
-          .reduce((accumulator: pinNode[], item) => {
-            item && item.node && accumulator.push(item.node);
-            return accumulator;
-          }, [])
-          .map(item => ({
-            title: item.description,
-            description: item.extended,
-            link: item.href,
-            date: item.time,
-            type: 'pin'
-          }))
-      : [];
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+function formatPins(data: Data) {
+  const pins = data.allPinboardBookmark.edges
+    .map(({ node }) => ({
+      title: node.description,
+      description: node.extended,
+      link: node.href,
+      date: node.time,
+      type: 'pin',
+    }))
+    .filter(({ title, link, date, type }) => title && link && date && type);
+  return pins;
+}
 
-    const mappedData = [...pins, ...posts]
-      .filter(item => item.title && item.link && item.type && item.date)
-      .sort((a, b) => b.date - a.date);
+export default function IndexPage(props: IndexPageProps): JSX.Element {
+  const { data, location } = props;
 
-    return (
-      <Layout location={location}>
-        <section
-          css={css`
-            margin-bottom: ${rhythm(2)};
-          `}
-        >
-          {mappedData &&
-            mappedData.map(item => (
-              <Card
-                key={item.link || Math.random()}
-                title={item.title}
-                description={item.description}
-                link={item.link}
-                type={item.type}
-              />
-            ))}
-        </section>
-        <Bio />
-      </Layout>
-    );
-  }
+  const content = [...formatPosts(data), ...formatPins(data)].sort(
+    (a, b) => b.date - a.date
+  );
+
+  return (
+    <Layout location={location}>
+      <section
+        css={css`
+          margin-bottom: ${rhythm(2)};
+        `}
+      >
+        {content &&
+          content.map(
+            item =>
+              item.link && (
+                <Card
+                  key={item.link}
+                  title={item.title}
+                  description={item.description}
+                  link={item.link}
+                  type={item.type}
+                />
+              )
+          )}
+      </section>
+      <Bio />
+    </Layout>
+  );
 }
 
 export const pageQuery = graphql`

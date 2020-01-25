@@ -1,6 +1,5 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { ReactNode } from 'react';
 import Meta from './Meta';
 import Footer from './Footer';
 import { Link } from 'gatsby';
@@ -8,11 +7,11 @@ import { rhythm, scale } from '../utils/typography';
 import Logo from './logo.svg';
 
 type LayoutProps = {
-  children: ReactNode;
+  children: React.ReactNode;
   location: Location;
 };
 
-const Layout = ({ children, location }: LayoutProps) => {
+const Layout = ({ children, location }: LayoutProps): JSX.Element => {
   const isHome = location.pathname === '/';
 
   const layoutStyle = css`

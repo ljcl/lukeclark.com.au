@@ -7,45 +7,41 @@ import Bio from '../components/Bio';
 import { HTMLContent } from '../components/Content';
 import { rhythm } from '../utils/typography';
 
+import { BlogPostBySlugQuery as Data } from '../graphqlTypes';
+
 type BlogPostType = {
-  data: {
-    markdownRemark: {
-      html: string;
-      frontmatter: {
-        date: string;
-        title: string;
-        description: string;
-      };
-      fields: {
-        slug: string;
-      };
-    };
-    site: {
-      siteMetadata: {
-        title: string;
-        description: string;
-      };
-    };
-  };
+  data: Data;
   location: Location;
 };
 
-const BlogPost = ({ data, location }: BlogPostType) => {
-  const {
-    markdownRemark: {
-      html: postHtml,
-      frontmatter: {
-        title: postTitle,
-        description: postDescription,
-        date: postDate
-      },
-      fields: { slug }
-    }
-  } = data;
+function formatPost(data: Data) {
+  if (!data.markdownRemark) return null;
+  const { html, frontmatter, fields } = data.markdownRemark;
+
+  const title = frontmatter?.title;
+  const date = frontmatter?.date;
+
+  const metaProps = {
+    title: title || undefined,
+    description: frontmatter?.description || undefined,
+    slug: fields?.slug || undefined,
+  };
+
+  return { metaProps, html, title, date };
+}
+
+const BlogPost = ({ data, location }: BlogPostType): JSX.Element | null => {
+  const postData = formatPost(data);
+
+  if (!postData) return null;
+
+  const { metaProps, html, title, date } = postData;
+
+  if (!metaProps || !html || !title || !date) return null;
 
   return (
     <Layout location={location}>
-      <Meta title={postTitle} description={postDescription} slug={slug} />
+      <Meta {...metaProps} />
       <article
         css={css`
           margin-bottom: ${rhythm(2)};
@@ -53,7 +49,7 @@ const BlogPost = ({ data, location }: BlogPostType) => {
         itemScope
         itemType="http://schema.org/BlogPosting"
       >
-        <h1>{postTitle}</h1>
+        <h1>{title}</h1>
         <div
           css={css`
             color: #707070;
@@ -64,9 +60,9 @@ const BlogPost = ({ data, location }: BlogPostType) => {
             margin-bottom: ${rhythm(2)};
           `}
         >
-          {postDate}
+          {date}
         </div>
-        <HTMLContent content={postHtml} />
+        <HTMLContent content={html} />
       </article>
       <Bio />
     </Layout>

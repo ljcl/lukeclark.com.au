@@ -5,7 +5,7 @@ type NotFoundPageProps = {
   location: Location;
 };
 
-const NotFoundPage = ({ location }: NotFoundPageProps) => (
+const NotFoundPage = ({ location }: NotFoundPageProps): JSX.Element => (
   <Layout location={location}>
     <div>
       <h1>NOT FOUND</h1>

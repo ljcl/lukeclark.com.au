@@ -16,7 +16,7 @@ const bioTextStyle = css`
 
 const bioImgStyle = css`
   border: 3px solid #010406;
-  border-radius: 100%;  
+  border-radius: 100%;
   margin-right: ${rhythm(1 / 2)};
   margin-bottom: 0;
   width: ${rhythm(2.2)};
