@@ -2,7 +2,6 @@
 import { css, jsx } from '@emotion/core';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import Bio from '../components/Bio';
 import Card from '../components/Card';
 import { rhythm } from '../utils/typography';
 import { IndexQueryQuery as Data } from '../graphqlTypes';
@@ -76,7 +75,6 @@ export default function IndexPage(props: IndexPageProps): JSX.Element {
               )
           )}
       </section>
-      <Bio />
     </Layout>
   );
 }

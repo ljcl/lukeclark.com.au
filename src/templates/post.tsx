@@ -3,7 +3,6 @@ import { css, jsx } from '@emotion/core';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Meta from '../components/Meta';
-import Bio from '../components/Bio';
 import { HTMLContent } from '../components/Content';
 import { rhythm } from '../utils/typography';
 
@@ -64,7 +63,6 @@ const BlogPost = ({ data, location }: BlogPostType): JSX.Element | null => {
         </div>
         <HTMLContent content={html} />
       </article>
-      <Bio />
     </Layout>
   );
 };
