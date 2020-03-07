@@ -12,19 +12,14 @@ type CardProps = {
 };
 
 const linkStyles = css`
-  position: relative;
-  top: -2px;
-  right: auto;
-  margin: 0 ${rhythm(1 / 2)};
-  height: 100%;
-  width: 18px;
-  display: inline-block;
-  vertical-align: middle;
-  @media (min-width: 780px) {
+  :before {
+    content: '';
+    border-style: solid;
+    border-width: 12px 12px 0 0;
+    border-color: hsla(0, 0%, 0%, 0.8) transparent transparent transparent;
     position: absolute;
-    right: calc(100% + ${rhythm(1 / 2)});
     top: 0;
-    margin: 0;
+    left: -12px;
   }
 `;
 
@@ -35,7 +30,10 @@ const Card = ({ title, description, link, rel, type }: CardProps) => {
     h2,
     p {
       margin-bottom: 0;
-      font-size: ${type !== 'post' && '1rem'};
+    }
+    p {
+      font-weight: 700;
+      font-style: italic;
     }
   `;
   return title && link ? (
@@ -45,12 +43,11 @@ const Card = ({ title, description, link, rel, type }: CardProps) => {
       css={articleStyles}
     >
       <h2>
-        <Link to={link} rel={rel}>
+        <Link to={link} rel={rel} css={type === 'pin' && linkStyles}>
           {title}
-          {type === 'pin' && <ExternalIcon css={linkStyles} />}
         </Link>
       </h2>
-      <p itemProp="description">{type === 'post' && description}</p>
+      {type === 'post' && <p itemProp="description">{description}</p>}
     </article>
   ) : null;
 };
