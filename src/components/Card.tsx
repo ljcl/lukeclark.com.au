@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import Link from './Link';
-import { rhythm } from '../utils/typography';
-import ExternalIcon from './external.svg';
+
 type CardProps = {
   title?: string | null;
   description?: string | null;
@@ -23,7 +23,7 @@ const linkStyles = css`
   }
 `;
 
-const Card = ({ title, description, link, rel, type }: CardProps) => {
+const Card = ({ title, description, link, rel, type }: CardProps): JSX.Element | null => {
   const articleStyles = css`
     margin-bottom: 1.529rem;
     position: relative;
@@ -43,6 +43,7 @@ const Card = ({ title, description, link, rel, type }: CardProps) => {
       css={articleStyles}
     >
       <h2>
+        {/* @ts-ignore - meh */}
         <Link to={link} rel={rel} css={type === 'pin' && linkStyles}>
           {title}
         </Link>

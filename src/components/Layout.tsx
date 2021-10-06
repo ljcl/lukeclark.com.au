@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
+import { Link } from 'gatsby';
 import Meta from './Meta';
 import Footer from './Footer';
-import { Link } from 'gatsby';
 import { rhythm, scale } from '../utils/typography';
 import Logo from './logo.svg';
 

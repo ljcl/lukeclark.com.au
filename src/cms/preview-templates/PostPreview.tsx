@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { HTMLContent } from '../../components/Content';
 
 type PostPreviewProps = {
@@ -8,12 +8,12 @@ type PostPreviewProps = {
   };
 };
 
-const PostPreview = ({ entry, widgetFor }: PostPreviewProps) => (
-  <Fragment>
+const PostPreview = ({ entry, widgetFor }: PostPreviewProps): JSX.Element => (
+  <>
     <h1>{entry.getIn(['data', 'title'])}</h1>
     <p>{entry.getIn(['data', 'description'])}</p>
     <HTMLContent content={widgetFor('body')} />
-  </Fragment>
+  </>
 );
 
 export default PostPreview;

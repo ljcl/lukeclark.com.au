@@ -21,16 +21,15 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/posts/`,
-        name: 'posts',
-        ignore: [`**/__generated__/*`],
+        path: `${__dirname}/static/assets`,
+        name: 'assets',
       },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/assets/`,
-        name: 'images',
+        path: `${__dirname}/src/posts`,
+        name: 'posts'
       },
     },
     {
@@ -40,12 +39,7 @@ module.exports = {
       resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
-          {
-            resolve: `gatsby-remark-relative-images`,
-            options: {
-              name: 'images',
-            },
-          },
+          `gatsby-remark-relative-images`,
           {
             resolve: `gatsby-remark-images`,
             options: {
@@ -103,6 +97,12 @@ module.exports = {
       options: {
         pathToConfigModule: 'src/utils/typography',
       },
+    },
+    {
+      resolve: `gatsby-plugin-graphql-codegen`,
+      options: {
+        fileName: `./src/graphqlTypes.ts`,
+      }
     },
     {
       resolve: 'gatsby-plugin-netlify-cms',

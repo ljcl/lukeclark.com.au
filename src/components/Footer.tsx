@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import { useInView } from 'react-intersection-observer';
 import { rhythm } from '../utils/typography';
 import LastFmNowPlaying from './LastFmNowPlaying';
@@ -45,7 +46,7 @@ const Footer = () => {
   return (
     <div css={bioStyle}>
       <figure css={bioImgStyle}>
-        <img src={profileImg} alt={`Luke Clark`} />
+        <img src={profileImg} alt="Luke Clark" />
       </figure>
       <div css={bioTextStyle}>
         <p>
