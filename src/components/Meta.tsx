@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticQuery, graphql } from 'gatsby';
 
-import { GetSiteMetadataQuery } from '../graphqlTypes';
+import { Query } from '../graphqlTypes';
+
 const query = graphql`
   query GetSiteMetadata {
     site {
@@ -20,10 +22,10 @@ const query = graphql`
 `;
 
 type MetaProps = {
-  description?: string;
-  image?: string;
-  slug?: string;
-  title?: string;
+  description?: string | null;
+  image?: string | null;
+  slug?: string | null;
+  title?: string | null;
 };
 
 function Meta({
@@ -35,7 +37,7 @@ function Meta({
   return (
     <StaticQuery
       query={query}
-      render={(data: GetSiteMetadataQuery): JSX.Element => {
+      render={(data: Query): JSX.Element => {
         const siteMetadata = data.site?.siteMetadata;
         const metaDescription =
           description || siteMetadata?.description || undefined;

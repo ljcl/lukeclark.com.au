@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Card from '../components/Card';
@@ -11,14 +11,6 @@ type IndexPageProps = {
   location: Location;
 };
 
-type FormattedContent = {
-  title: string;
-  description?: string;
-  link: string;
-  date: number;
-  type: string;
-};
-
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function formatPosts(data: Data) {
   const posts = data.allMarkdownRemark.edges
@@ -26,7 +18,7 @@ function formatPosts(data: Data) {
       title: frontmatter && frontmatter.title,
       description: frontmatter && frontmatter.description,
       link: fields && fields.slug,
-      date: frontmatter && frontmatter.date,
+      date: (frontmatter && frontmatter.date) as number,
       type: 'post',
     }))
     .filter(({ title, link, date, type }) => title && link && date && type);
@@ -40,7 +32,7 @@ function formatPins(data: Data) {
       title: node.description,
       description: node.extended,
       link: node.href,
-      date: node.time,
+      date: node.time as number,
       type: 'pin',
     }))
     .filter(({ title, link, date, type }) => title && link && date && type);
@@ -63,7 +55,7 @@ export default function IndexPage(props: IndexPageProps): JSX.Element {
       >
         {content &&
           content.map(
-            item =>
+            (item) =>
               item.link && (
                 <Card
                   key={item.link}

@@ -4,26 +4,29 @@ module.exports = {
     es6: true,
   },
   extends: [
-    'plugin:react/recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
+    'airbnb',
+    'airbnb-typescript',
+    "airbnb/hooks",
     'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'prettier',
   ],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
     project: 'tsconfig.json',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint', 'emotion', 'prettier'],
+  plugins: ['@typescript-eslint', '@emotion'],
   settings: {
     react: {
       version: 'detect',
     },
   },
   rules: {
-    'emotion/jsx-import': 'error',
-    'emotion/no-vanilla': 'error',
-    'emotion/import-from-emotion': 'error',
-    'emotion/styled-import': 'error',
+    '@emotion/jsx-import': 'error',
+    '@emotion/no-vanilla': 'error',
+    '@emotion/import-from-emotion': 'error',
+    '@emotion/styled-import': 'error',
+    "react/prop-types": "off",
+    "react/require-default-props": "off"
   },
 };

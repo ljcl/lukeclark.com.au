@@ -13,7 +13,7 @@ type TrackState = {
   track: TrackType[];
 };
 
-function LastFmNowPlaying() {
+function LastFmNowPlaying(): JSX.Element | null {
   const [error, setError] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [track, setTrack] = useState<TrackType>(null);
@@ -26,7 +26,7 @@ function LastFmNowPlaying() {
           setTrack(result.track[0]);
           setIsLoaded(true);
         },
-        (error: any) => {
+        (err: any) => {
           setError(error);
           setIsLoaded(true);
         }
@@ -35,7 +35,9 @@ function LastFmNowPlaying() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!isLoaded || error) return null;

@@ -1,29 +1,29 @@
 /** @jsx jsx */
-import { css, jsx } from '@emotion/core';
+import { css, jsx } from '@emotion/react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import Meta from '../components/Meta';
 import { HTMLContent } from '../components/Content';
 import { rhythm } from '../utils/typography';
 
-import { BlogPostBySlugQuery as Data } from '../graphqlTypes';
+import { Query } from '../graphqlTypes';
 
 type BlogPostType = {
-  data: Data;
+  data: Query;
   location: Location;
 };
 
-function formatPost(data: Data) {
+function formatPost(data: Query) {
   if (!data.markdownRemark) return null;
   const { html, frontmatter, fields } = data.markdownRemark;
 
   const title = frontmatter?.title;
-  const date = frontmatter?.date;
+  const date = frontmatter?.date as string;
 
   const metaProps = {
-    title: title || undefined,
-    description: frontmatter?.description || undefined,
-    slug: fields?.slug || undefined,
+    title,
+    description: frontmatter?.description,
+    slug: fields?.slug,
   };
 
   return { metaProps, html, title, date };
@@ -40,6 +40,7 @@ const BlogPost = ({ data, location }: BlogPostType): JSX.Element | null => {
 
   return (
     <Layout location={location}>
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
       <Meta {...metaProps} />
       <article
         css={css`
