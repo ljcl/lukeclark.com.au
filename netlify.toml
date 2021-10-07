@@ -7,3 +7,19 @@
 [[redirects]]
   from = "/posts/*"
   to = "/:splat"
+[[redirects]]
+  from = "/2021-10-06-migrating-the-platform-that-powers-abc-sites-to-typescript/"
+  to = "/migrating-the-platform-that-powers-abc-sites-to-typescript/"
+  status = 301
+[[redirects]]
+  from = "/2016-08-15-save-your-commit-history-to-a-running-harvest-timer/"
+  to = "/save-your-commit-history-to-a-running-harvest-timer/"
+  status = 301
+[[redirects]]
+  from = "/2016-08-04-why-you-should-be-using-http-2-and-https/"
+  to = "/why-you-should-be-using-http-2-and-https/"
+  status = 301
+[[redirects]]
+  from = "/2016-08-03-search-301-redirect-changes/"
+  to = "/search-301-redirect-changes/"
+  status = 301
