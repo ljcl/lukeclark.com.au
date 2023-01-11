@@ -27,7 +27,7 @@
     "gatsby-remark-smartypants": "^4.11.0",
     "gatsby-source-filesystem": "^3.14.0",
     "gatsby-source-pinboard": "^2.0.0",
-    "gatsby-transformer-remark": "^4.11.0",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^3.14.0",
     "intersection-observer": "^0.12.0",
     "netlify-cms-app": "^2.15.46",
